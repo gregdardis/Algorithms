@@ -36,23 +36,57 @@ public class Karatsuba {
         return ac.multiply(BigInteger.TEN.pow(2 * halfN)).add(ad_bc.multiply(BigInteger.TEN.pow(halfN))).add(bd);
     }
     
+    /**
+     * Makes sure the user inputs either a positive or negative integer.
+     * 
+     * @param str   User inputted String
+     * @return      True if the user inputted a positive or negative integer, false if there are any other characters
+     */
+    private static boolean isNumber(String str) {
+        if (!Character.isDigit(str.charAt(0)) && str.charAt(0) != '-') {
+            return false;
+        }
+        for (int i = 1; i < str.length(); i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    private static void printTryAgain() {
+        System.out.println("Try again. All characters in your number must be between 0 and 9.");
+    }
+    
     public static void main(String[] args) {
         Karatsuba karatsuba = new Karatsuba();
+        
         System.out.println("This program multiplies two numbers together.\nThey can be huge numbers!\nFor example: ");
+        
         BigInteger n1 = new BigInteger("314462643383279502884197169399375105820974944592");
         BigInteger n2 = new BigInteger("277757247093699959574966967627");
+        
         System.out.print(n1 + " * " + n2 + " = " + karatsuba.multiply(n1, n2) + "\n");
+        
         while (true) {
             System.out.println("\nEnter two numbers to find their product (-1 to quit): ");
             
             System.out.print("Number 1: ");
             String str1 = scanner.nextLine();
             if (str1.equals(SENTINAL)) break;
+            if (!isNumber(str1)) {
+                printTryAgain();
+                continue;
+            }
             BigInteger num1 = new BigInteger(str1);
             
             System.out.print("Number 2: ");
             String str2 = scanner.nextLine();
             if (str2.equals(SENTINAL)) break;
+            if (!isNumber(str2)) {
+                printTryAgain();
+                continue;
+            }
             BigInteger num2 = new BigInteger(str2);
             
             System.out.println("Product: " + karatsuba.multiply(num1, num2));
