@@ -12,6 +12,8 @@ public class Karatsuba {
     
     private static Scanner scanner = new Scanner(System.in);
     
+    private static final String SENTINAL = "-1";
+    
     public BigInteger multiply(BigInteger x, BigInteger y) {
         // Once the problem is reduced down to single digit multiplication, simply multiply.
         // This is the base case to stop the recursion.
@@ -45,12 +47,12 @@ public class Karatsuba {
             
             System.out.print("Number 1: ");
             String str1 = scanner.nextLine();
-            if (str1.equals("-1")) break;
+            if (str1.equals(SENTINAL)) break;
             BigInteger num1 = new BigInteger(str1);
             
             System.out.print("Number 2: ");
             String str2 = scanner.nextLine();
-            if (str2.equals("-1")) break;
+            if (str2.equals(SENTINAL)) break;
             BigInteger num2 = new BigInteger(str2);
             
             System.out.println("Product: " + karatsuba.multiply(num1, num2));
