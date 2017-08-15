@@ -6,38 +6,31 @@ import java.math.BigInteger;
 public class Karatsuba {
     
     public BigInteger multiply(BigInteger x, BigInteger y) {
-        if (x.compareTo(BigInteger.TEN) == -1 && y.compareTo(BigInteger.TEN) == -1) {
+        // Once the problem is reduced down to single digit multiplication, simply multiply.
+        // This is the base case to stop the recursion.
+        if (x.compareTo(BigInteger.TEN) == -1 || y.compareTo(BigInteger.TEN) == -1) {
             return x.multiply(y);
         }
-        // divide x into a and b halves
-        String xString = x.toString();
-        int xMid = xString.length() / 2;
         
-        String aString = xString.substring(0, xMid);
-        String bString = xString.substring(xMid);
-        BigInteger a = new BigInteger(aString);
-        BigInteger b = new BigInteger(bString);
+        int n = Math.max(x.toString().length(), y.toString().length());
+        int halfN = n / 2;
         
-        // divide y into c and d halves
-        String yString = y.toString();
-        int yMid = yString.length() / 2;
-        
-        String cString = yString.substring(0, yMid);
-        String dString = yString.substring(yMid);
-        BigInteger c = new BigInteger(cString);
-        BigInteger d = new BigInteger(dString);
+        BigInteger a = x.divide(BigInteger.TEN.pow(halfN));
+        BigInteger b = x.mod(BigInteger.TEN.pow(halfN));
+        BigInteger c = y.divide(BigInteger.TEN.pow(halfN));
+        BigInteger d = y.mod(BigInteger.TEN.pow(halfN));
         
         BigInteger ac = multiply(a, c);
         BigInteger bd = multiply(b, d);
-        BigInteger ad_bc = multiply(a.add(b), c.add(d)).subtract(bd).subtract(ac); 
+        BigInteger ad_bc = (multiply(a.add(b), c.add(d))).subtract(ac).subtract(bd);
         
-        return ac;
-        // need to figure out which length to put it to power of... higher or lower one if one is odd and one is even
-//        return ((BigInteger.TEN).pow(xString.length()).multiply(ac)).add((BigInteger.TEN).pow(xMid).multiply(ad_bc).add(bd)); 
+        return ac.multiply(BigInteger.TEN.pow(2 * halfN)).add(ad_bc.multiply(BigInteger.TEN.pow(halfN))).add(bd);
     }
     
     public static void main(String[] args) {
         Karatsuba karatsuba = new Karatsuba();
-        System.out.println("Return: " + karatsuba.multiply(BigInteger.valueOf(1234), BigInteger.valueOf(5678)));
+        BigInteger n1 = new BigInteger("3141592653589793238462643383279502884197169399375105820974944592");
+        BigInteger n2 = new BigInteger("2718281828459045235360287471352662497757247093699959574966967627");
+        System.out.println("Product: " + karatsuba.multiply(n1, n2));
     }
 }
