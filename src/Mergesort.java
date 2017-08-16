@@ -1,8 +1,13 @@
 
+/**
+ * 
+ * @author Greg Dardis
+ *
+ */
 public class Mergesort {
 
     /**
-     * Sorts an array using the mergesort algorithm.
+     * Sorts an array using the merge sort algorithm.
      * 
      * @param arr   Array to be sorted
      * @param a     Left index of the array
@@ -78,10 +83,29 @@ public class Mergesort {
         }
     }
     
+    /* Demonstration */
     public static void main(String[] args) {
-        int test[] = {12, 11, 13, 5, 7, 6, 0, 999, 32, 32, 32, 21, 13, 8};
-        int test2[] = {12, 11, 13, 5};
-        sort(test, 0, test.length - 1);
-        printIntArray(test);
+        int test1[] = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
+        int test2[] = {3, 2, 1, 2, 3};
+        int test3[] = {0};
+        System.out.println("This is a merge sort demonstration.");
+        
+        System.out.print("\nInitial array 1: ");
+        printIntArray(test1);
+        System.out.print("\nSorted array 1: ");
+        sort(test1, 0, test1.length - 1);
+        printIntArray(test1);
+        
+        System.out.print("\n\nInitial array 2: ");
+        printIntArray(test2);
+        System.out.print("\nSorted array 2: ");
+        sort(test2, 0, test2.length - 1);
+        printIntArray(test2);
+        
+        System.out.print("\n\nInitial array 3: ");
+        printIntArray(test3);
+        System.out.print("\nSorted array 3: ");
+        sort(test3, 0, test3.length - 1);
+        printIntArray(test3);
     }
 }
