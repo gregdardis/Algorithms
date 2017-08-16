@@ -16,7 +16,6 @@ public class Mergesort {
      */
     public static void sort(int[] arr, int a, int c) {
         if (a < c) {
-            // mid = middle of array
             int mid = a + (c - a)/2;
             sort(arr, a, mid);
             sort(arr, mid+1, c);
