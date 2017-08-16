@@ -1,13 +1,13 @@
 
 /**
- * 
- * @author Greg Dardis
- *
+ * This program is an implementation of the recursive merge sort algorithm.
+ * The sort method sorts an array of ints. 
+ * There is a demonstration in the main method of arrays being sorted and printed to the console.
  */
 public class Mergesort {
 
     /**
-     * Sorts an array using the merge sort algorithm.
+     * Sorts an array of ints using the merge sort algorithm.
      * 
      * @param arr   Array to be sorted
      * @param a     Left index of the array
