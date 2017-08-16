@@ -24,11 +24,6 @@ public class Mergesort {
      * First subarray is array[a..mid], second subarray is array[mid+1..c]
      */
     private static void merge(int[] arr, int a, int mid, int c) {
-        /* three pointers, one to go through each array */
-        int i = 0;
-        int j = 0;
-        int k = 0;
-       
         /* Temp arrays */
         int ALength = mid - a + 1;
         int BLength = c - mid;
@@ -43,18 +38,25 @@ public class Mergesort {
             B[y] = arr[mid + y + 1];
         }
         
+        /* three pointers, one to go through each array */
+        int i = 0;
+        int j = 0;
+        int k = a;
+        
         /* Actual merging */
         for (k = a; k < arr.length; k++) {
             if (A[i] <= B[j]) {
                 arr[k] = A[i];
                 i++;
-                if (i == (ALength - 1)) break;
+                if (!(i < ALength)) break;
             } else if (B[j] < A[i]) {
                 arr[k] = B[j];
                 j++;
-                if (j == (BLength - 1)) break;
+                if (!(j < BLength)) break;
             }
         }
+        // make sure k pointer is in the right spot in the array after breaking
+        k++;
         
         /* Copy remaining elements of whichever array has leftovers */
         while (i < ALength) {
@@ -70,7 +72,16 @@ public class Mergesort {
         }
     }
     
+    private static void printIntArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    
     public static void main(String[] args) {
-        
+        int test[] = {12, 11, 13, 5, 7, 6, 0, 999, 32, 32, 32, 21, 13, 8};
+        int test2[] = {12, 11, 13, 5};
+        sort(test, 0, test.length - 1);
+        printIntArray(test);
     }
 }
