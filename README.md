@@ -17,6 +17,9 @@ Compile:
 Run:  
 `java Karatsuba`
 
+
+
+
 # Merge Sort
 ## Description
 This program uses the recursive merge sort algorithm to sort an array of ints.
@@ -29,7 +32,7 @@ a short demonstration of sorting three different int arrays.
 `cd src`
 
 Compile:  
-`javac Mergesort`  
+`javac Mergesort.java`  
 
 Run:  
 `java Mergesort`
