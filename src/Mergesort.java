@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * This program is an implementation of the recursive merge sort algorithm.
@@ -82,11 +85,37 @@ public class Mergesort {
         }
     }
     
+    /**
+     * Takes 100,000 numbers from a given file and puts them into an array.
+     * 
+     * @param fileName  Name of file 
+     * @return          Array with 100,000 numbers in it
+     */
+    private static int[] getArrayFromFile(String fileName) {
+        File file = new File(fileName);
+        int[] arr = new int[100000];
+        int i = 0;
+
+        try {
+            Scanner scanner = new Scanner(file);
+            
+            while (scanner.hasNextLine()) {
+                arr[i] = scanner.nextInt();
+                i++;
+            }
+            scanner.close();
+        } 
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return arr;
+    }
+    
     /* Demonstration */
     public static void main(String[] args) {
-        int test1[] = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
-        int test2[] = {3, 2, 1, 2, 3};
-        int test3[] = {0};
+        int[] test1 = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
+        int[] test2 = {3, 2, 1, 2, 3};
+        int[] test3 = {0};
         System.out.println("This is a merge sort demonstration.");
         
         System.out.print("\nInitial array 1: ");
@@ -106,5 +135,10 @@ public class Mergesort {
         System.out.print("\nSorted array 3: ");
         sort(test3, 0, test3.length - 1);
         printIntArray(test3);
+        
+        System.out.println("\n\nGetting 100,000 ints array.");
+        int[] hugeArray = getArrayFromFile("IntegerArray.txt");
+        sort(hugeArray, 0, hugeArray.length - 1);
+        System.out.println("Array has been sorted.");
     }
 }
