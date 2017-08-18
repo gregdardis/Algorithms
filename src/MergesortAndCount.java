@@ -123,30 +123,31 @@ public class MergesortAndCount {
     /* Demonstration */
     public static void main(String[] args) {
         int[] test1 = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
-        int[] test2 = {5, 4, 3, 2};
+        int[] test2 = {3, 2, 1, 2, 3};
         int[] test3 = {0};
-        System.out.println("This is a merge sort demonstration.");
+        System.out.println("This is a merge sort and count inversions of the original array demonstration.");
         
         System.out.print("\nInitial array 1: ");
         printIntArray(test1);
-        System.out.print("\nSorted array 1: ");
-        sortAndCount(test1, 0, test1.length - 1);
+        System.out.println("\nNumber of inversions: " + sortAndCount(test1, 0, test1.length - 1));
+        System.out.print("Sorted array 1: ");
         printIntArray(test1);
         
         System.out.print("\n\nInitial array 2: ");
         printIntArray(test2);
-        System.out.print("\nSorted array 2: ");
-        System.out.println("Number of inversions: " + sortAndCount(test2, 0, test2.length - 1));
+        System.out.println("\nNumber of inversions: " + sortAndCount(test2, 0, test2.length - 1));
+        System.out.print("Sorted array 2: ");
         printIntArray(test2);
         
         System.out.print("\n\nInitial array 3: ");
         printIntArray(test3);
-        System.out.print("\nSorted array 3: ");
-        sortAndCount(test3, 0, test3.length - 1);
+        System.out.println("\nNumber of inversions: " + sortAndCount(test3, 0, test3.length - 1));
+        System.out.print("Sorted array 3: ");
         printIntArray(test3);
         
-        System.out.println("\n\nGetting 100,000 ints array.");
-        int[] hugeArray = getArrayFromFile("IntegerArray.txt");
+        String fileName = "IntegerArray.txt";
+        System.out.println("\n\nGetting 100,000 ints array from file: " + fileName);
+        int[] hugeArray = getArrayFromFile(fileName);
         System.out.println("Number of inversions: " + sortAndCount(hugeArray, 0, hugeArray.length - 1));
         System.out.println("Array has been sorted.");
     }
