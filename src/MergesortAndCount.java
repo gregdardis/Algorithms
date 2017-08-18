@@ -7,30 +7,34 @@ import java.util.Scanner;
  * The sort method sorts an array of ints. 
  * There is a demonstration in the main method of arrays being sorted and printed to the console.
  */
-public class Mergesort {
+public class MergesortAndCount {
 
     /**
-     * Sorts an array of ints using the merge sort algorithm.
+     * Sorts an array of ints using the merge sort algorithm, and counts
+     * the number of inversions in the array while sorting.
      * 
      * @param arr   Array to be sorted
      * @param a     Left index of the array
      * @param c     Right index of the array
-     * @return      Sorted array
+     * @return      Number of inversions in the original array
      */
-    public static void sort(int[] arr, int a, int c) {
+    public static long sortAndCount(int[] arr, int a, int c) {
+        long inversionCount = 0;
         if (a < c) {
             int mid = a + (c - a)/2;
-            sort(arr, a, mid);
-            sort(arr, mid+1, c);
-            merge(arr, a, mid, c);
-        }
+            inversionCount = sortAndCount(arr, a, mid);
+            inversionCount += sortAndCount(arr, mid+1, c);
+            inversionCount += merge(arr, a, mid, c);
+        } 
+        return inversionCount;
     }
     
     /**
      * Merges two subarrays of arr[].
-     * First subarray is array[a..mid], second subarray is array[mid+1..c]
+     * First subarray is array[a..mid], second subarray is array[mid+1..c].
+     * Counts the number of inversions in the array.
      */
-    private static void merge(int[] arr, int a, int mid, int c) {
+    private static long merge(int[] arr, int a, int mid, int c) {
         /* Temp arrays */
         int ALength = mid - a + 1;
         int BLength = c - mid;
@@ -49,6 +53,7 @@ public class Mergesort {
         int i = 0;
         int j = 0;
         int k = a;
+        long inversionCount = 0;
         
         /* Actual merging */
         for (k = a; k < arr.length; k++) {
@@ -59,6 +64,8 @@ public class Mergesort {
             } else if (B[j] < A[i]) {
                 arr[k] = B[j];
                 j++;
+                // increment inversionCount by the number of remaining elements in A
+                inversionCount = inversionCount + (A.length - i); 
                 if (!(j < BLength)) break;
             }
         }
@@ -77,6 +84,8 @@ public class Mergesort {
             j++;
             k++;
         }
+        
+        return inversionCount;
     }
     
     private static void printIntArray(int[] arr) {
@@ -114,31 +123,31 @@ public class Mergesort {
     /* Demonstration */
     public static void main(String[] args) {
         int[] test1 = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
-        int[] test2 = {3, 2, 1, 2, 3};
+        int[] test2 = {5, 4, 3, 2};
         int[] test3 = {0};
         System.out.println("This is a merge sort demonstration.");
         
         System.out.print("\nInitial array 1: ");
         printIntArray(test1);
         System.out.print("\nSorted array 1: ");
-        sort(test1, 0, test1.length - 1);
+        sortAndCount(test1, 0, test1.length - 1);
         printIntArray(test1);
         
         System.out.print("\n\nInitial array 2: ");
         printIntArray(test2);
         System.out.print("\nSorted array 2: ");
-        sort(test2, 0, test2.length - 1);
+        System.out.println("Number of inversions: " + sortAndCount(test2, 0, test2.length - 1));
         printIntArray(test2);
         
         System.out.print("\n\nInitial array 3: ");
         printIntArray(test3);
         System.out.print("\nSorted array 3: ");
-        sort(test3, 0, test3.length - 1);
+        sortAndCount(test3, 0, test3.length - 1);
         printIntArray(test3);
         
         System.out.println("\n\nGetting 100,000 ints array.");
         int[] hugeArray = getArrayFromFile("IntegerArray.txt");
-        sort(hugeArray, 0, hugeArray.length - 1);
+        System.out.println("Number of inversions: " + sortAndCount(hugeArray, 0, hugeArray.length - 1));
         System.out.println("Array has been sorted.");
     }
 }
