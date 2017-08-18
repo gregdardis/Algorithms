@@ -22,7 +22,9 @@ Run:
 
 # Merge Sort and Count
 ## Description
-This program uses the recursive merge sort algorithm to sort an array of ints, while also counting the number of inversions of the original array. An inversion in an array is defined as such: If A[i], A[j] are two entries in an array A,  i and j are inverted if j > i but A[j] < A[i].
+This program uses the recursive merge sort algorithm to sort an array of ints, while also counting the number of inversions of the original array.  
+
+An inversion in an array is defined as such: If A[i], A[j] are two entries in an array A,  i and j are inverted if j > i but A[j] < A[i].  
 Basically, if a larger number precedes a smaller number in the array, that is an inversion.
 For example: {2, 1} has 1 inversion, and {3, 2, 1} has 3 inversions. 
 
