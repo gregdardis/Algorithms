@@ -3,9 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This program is an implementation of the recursive merge sort algorithm.
- * The sort method sorts an array of ints. 
- * There is a demonstration in the main method of arrays being sorted and printed to the console.
+ * This program is an implementation of the recursive merge sort algorithm, with a counting feature
+ * to count the number of inversions in the original array.
+ * An inversion in an array is defined as such: If A[i], A[j] are two entries in an array A, 
+ * i and j are inverted if j > i but A[j] < A[i].
+ * 
+ * The sortAndCount method sorts an array of ints (and returns the number of inversions).
+ * There is a demonstration in the main method of arrays being sorted and their sorted form
+ * as well as number of inversions in the original array are printed to the console.
  */
 public class MergesortAndCount {
 
