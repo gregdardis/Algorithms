@@ -12,12 +12,12 @@ public class Quicksort {
         int pivotIndex = partition(arr, l, r);
         comparisons += sort(arr, l, pivotIndex - 1);
         comparisons += sort(arr, pivotIndex + 1, r);
-        return (r - l);
+        return comparisons + (r - l);
     }
     
     private static int partition(int[] arr, int l, int r) {
-        int pivotIndex = choosePivot(l);
-        
+        swap(arr, l, choosePivot(r));
+        int pivotIndex = l;
         // pointer to first element that is greater than the pivot
         int i = l + 1;
         
@@ -32,11 +32,11 @@ public class Quicksort {
     }
     
     /**
-     * Simply chooses the first element in the array for this implementation. 
+     * Simply chooses the last element in the array for this implementation. 
      * Going to be upgraded to the median-of-three pivot rule soon.
      */
-    private static int choosePivot(int l) {
-        return l;
+    private static int choosePivot(int r) {
+        return r;
     }
     
     /**
@@ -91,33 +91,33 @@ public class Quicksort {
         
         System.out.print("\nInitial array 1: ");
         printIntArray(test1);
-        System.out.print("\nSorted array 1: ");
         System.out.println("\nNumber of comparisons: " + Quicksort.sort(test1, 0, test1.length - 1));
+        System.out.print("Sorted array 1: ");
         printIntArray(test1);
         
         System.out.print("\n\nInitial array 2: ");
         printIntArray(test2);
-        System.out.print("\nSorted array 2: ");
         System.out.println("\nNumber of comparisons: " + Quicksort.sort(test2, 0, test2.length - 1));
+        System.out.print("Sorted array 2: ");
         printIntArray(test2);
         
         System.out.print("\n\nInitial array 3: ");
         printIntArray(test3);
-        System.out.print("\nSorted array 3: ");
         System.out.println("\nNumber of comparisons: " + Quicksort.sort(test3, 0, test3.length - 1));
+        System.out.print("Sorted array 3: ");
         printIntArray(test3);
         
         System.out.print("\n\nInitial array 4: ");
         printIntArray(test4);
-        System.out.print("\nSorted array 4: ");
         System.out.println("\nNumber of comparisons: " + Quicksort.sort(test4, 0, test4.length - 1));
+        System.out.print("Sorted array 4: ");
         printIntArray(test4);
         
         String fileName = "QuickSort.txt";
         System.out.println("\n\nGetting 10,000 ints array from file: " + fileName);
         int[] hugeArray = getArrayFromFile(fileName);
         System.out.println("Sorting 10,000 ints.");
-        System.out.println("\nNumber of comparisons: " + Quicksort.sort(hugeArray, 0, hugeArray.length - 1));
+        System.out.println("Number of comparisons: " + Quicksort.sort(hugeArray, 0, hugeArray.length - 1));
         System.out.println("Array has been sorted.");
         
     }
