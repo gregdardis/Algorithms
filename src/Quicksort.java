@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Quicksort {
 
@@ -51,18 +54,69 @@ public class Quicksort {
         }
     }
     
+    /**
+     * Takes 10,000 numbers from a given file and puts them into an array.
+     * 
+     * @param fileName  Name of file 
+     * @return          Array with 10,000 numbers in it
+     */
+    private static int[] getArrayFromFile(String fileName) {
+        File file = new File(fileName);
+        int[] arr = new int[10000];
+        int i = 0;
+
+        try {
+            Scanner scanner = new Scanner(file);
+            
+            while (scanner.hasNextLine()) {
+                arr[i] = scanner.nextInt();
+                i++;
+            }
+            scanner.close();
+        } 
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return arr;
+    }
+    
     public static void main(String[] args) {
-        int[] test1 = {3, 2, 5, 1, 4};
-//        int[] test1 = {3, 2, 1};
-        int[] test2 = {3, 2, 1, 2, 3};
+        int[] test1 = {3, 2};
+        int[] test2 = {3, 2, 1, 6, 3};
         int[] test3 = {0};
         int[] test4 = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
+        System.out.println("This is a quick sort demonstration.");
         
         System.out.print("\nInitial array 1: ");
+        printIntArray(test1);
+        System.out.print("\nSorted array 1: ");
+        Quicksort.sort(test1, 0, test1.length - 1);
+        printIntArray(test1);
+        
+        System.out.print("\n\nInitial array 2: ");
+        printIntArray(test2);
+        System.out.print("\nSorted array 2: ");
+        Quicksort.sort(test2, 0, test2.length - 1);
+        printIntArray(test2);
+        
+        System.out.print("\n\nInitial array 3: ");
+        printIntArray(test3);
+        System.out.print("\nSorted array 3: ");
+        Quicksort.sort(test3, 0, test3.length - 1);
+        printIntArray(test3);
+        
+        System.out.print("\n\nInitial array 4: ");
         printIntArray(test4);
-        System.out.print("Sorted array 1: ");
+        System.out.print("\nSorted array 4: ");
         Quicksort.sort(test4, 0, test4.length - 1);
         printIntArray(test4);
+        
+        String fileName = "QuickSort.txt";
+        System.out.println("\n\nGetting 10,000 ints array from file: " + fileName);
+        int[] hugeArray = getArrayFromFile(fileName);
+        System.out.println("Sorting 10,000 ints.");
+        Quicksort.sort(hugeArray, 0, hugeArray.length - 1);
+        System.out.println("Array has been sorted.");
         
     }
     
