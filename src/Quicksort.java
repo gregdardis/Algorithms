@@ -16,7 +16,7 @@ public class Quicksort {
     }
     
     private static int partition(int[] arr, int l, int r) {
-        swap(arr, l, choosePivot(r));
+        swap(arr, l, choosePivot(arr, l, r));
         int pivotIndex = l;
         // pointer to first element that is greater than the pivot
         int i = l + 1;
@@ -32,11 +32,21 @@ public class Quicksort {
     }
     
     /**
+     * TODO: make this calculate the median-of-three pivot as per assignment specifications.
      * Simply chooses the last element in the array for this implementation. 
      * Going to be upgraded to the median-of-three pivot rule soon.
      */
-    private static int choosePivot(int r) {
-        return r;
+    private static int choosePivot(int[] arr, int l, int r) {
+        int first = arr[l];
+        int last = arr[r];
+        int middle = arr[(l+r) / 2];
+        if ((first >= last && first <= middle) || (first >= middle && first <= last)) {
+            return l;
+        }
+        if ((last >= first && last <= middle) || (last >= middle && last <= first)) {
+            return r;
+        }
+        return (r / 2);
     }
     
     /**
