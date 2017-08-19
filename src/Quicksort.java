@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 public class Quicksort {
 
-    public static void sort(int[] arr, int l, int r) {
-        if (r - l < 1) return;
+    public static int sort(int[] arr, int l, int r) {
+        int comparisons = 0;
+        if (r - l < 1) return 0;
         // swap pivot to first element if it's not already first element
         int pivotIndex = partition(arr, l, r);
-        sort(arr, l, pivotIndex - 1);
-        sort(arr, pivotIndex + 1, r);
+        comparisons += sort(arr, l, pivotIndex - 1);
+        comparisons += sort(arr, pivotIndex + 1, r);
+        return (r - l);
     }
     
     private static int partition(int[] arr, int l, int r) {
@@ -85,37 +87,37 @@ public class Quicksort {
         int[] test2 = {3, 2, 1, 6, 3};
         int[] test3 = {0};
         int[] test4 = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
-        System.out.println("This is a quick sort demonstration.");
+        System.out.println("This is a quick sort demonstration, where the total number of comparisons is counted.");
         
         System.out.print("\nInitial array 1: ");
         printIntArray(test1);
         System.out.print("\nSorted array 1: ");
-        Quicksort.sort(test1, 0, test1.length - 1);
+        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test1, 0, test1.length - 1));
         printIntArray(test1);
         
         System.out.print("\n\nInitial array 2: ");
         printIntArray(test2);
         System.out.print("\nSorted array 2: ");
-        Quicksort.sort(test2, 0, test2.length - 1);
+        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test2, 0, test2.length - 1));
         printIntArray(test2);
         
         System.out.print("\n\nInitial array 3: ");
         printIntArray(test3);
         System.out.print("\nSorted array 3: ");
-        Quicksort.sort(test3, 0, test3.length - 1);
+        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test3, 0, test3.length - 1));
         printIntArray(test3);
         
         System.out.print("\n\nInitial array 4: ");
         printIntArray(test4);
         System.out.print("\nSorted array 4: ");
-        Quicksort.sort(test4, 0, test4.length - 1);
+        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test4, 0, test4.length - 1));
         printIntArray(test4);
         
         String fileName = "QuickSort.txt";
         System.out.println("\n\nGetting 10,000 ints array from file: " + fileName);
         int[] hugeArray = getArrayFromFile(fileName);
         System.out.println("Sorting 10,000 ints.");
-        Quicksort.sort(hugeArray, 0, hugeArray.length - 1);
+        System.out.println("\nNumber of comparisons: " + Quicksort.sort(hugeArray, 0, hugeArray.length - 1));
         System.out.println("Array has been sorted.");
         
     }
