@@ -40,13 +40,11 @@ public class Quicksort {
         int first = arr[l];
         int last = arr[r];
         int middle = arr[(l+r) / 2];
-        if ((first >= last && first <= middle) || (first >= middle && first <= last)) {
-            return l;
-        }
-        if ((last >= first && last <= middle) || (last >= middle && last <= first)) {
-            return r;
-        }
-        return (r / 2);
+        int[] medianArr = {first, middle, last};
+        MergesortAndCount.sortAndCount(medianArr, 0, medianArr.length - 1);
+        if (medianArr[1] == first) return l;
+        if (medianArr[1] == last) return r;
+        return (l+r) / 2;
     }
     
     /**
