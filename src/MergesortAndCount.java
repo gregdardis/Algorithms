@@ -21,8 +21,8 @@ public class MergesortAndCount {
      * the number of inversions in the array while sorting.
      * 
      * @param arr   Array to be sorted
-     * @param a     Left index of the array
-     * @param c     Right index of the array
+     * @param a     Left index of the array to be sorted
+     * @param c     Right index of the array to be sorted
      * @return      Number of inversions in the original array
      */
     public static long sortAndCount(int[] arr, int a, int c) {

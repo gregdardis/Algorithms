@@ -3,21 +3,30 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This program is an implementation of quicksort, with the pivot chosen using the median-of-three pivot rule.
+ * This program is an implementation of QuickSort, with the pivot chosen using the median-of-three pivot rule.
  * 
  * The median-of-three rule chooses the pivot by considering the first, middle and last element
  * of the given array, and taking the median of these three values. The median element is swapped with
  * the first element of the given array, and that median element at index 0 is now the pivot.
  * Note: In array [1, 2, 3, 4] the middle element is the 2.
  * 
- * This implementation of quicksort counts the number of comparisons made while sorting,
+ * This implementation of QuickSort counts the number of comparisons made while sorting,
  * and returns that number as an int. 
  * Note: The comparisons made while choosing the pivot using the median-of-three rule are not counted.
  * 
  * The main() method contains a demonstration of the sorting algorithm.
  */
-public class Quicksort {
-
+public class QuickSort {
+    
+    /**
+     * Sorts an array of ints using the QuickSort algorithm, and counts
+     * the number of comparisons made while sorting.
+     * 
+     * @param arr   Array to be sorted
+     * @param a     Left index of the array to be sorted
+     * @param c     Right index of the array to be sorted
+     * @return      Number of comparisons made while sorting
+     */
     public static int sort(int[] arr, int l, int r) {
         int comparisons = 0;
         if (r - l < 1) return 0;
@@ -27,6 +36,18 @@ public class Quicksort {
         return comparisons + (r - l);
     }
     
+    /**
+     * Partitions the array such that the pivot is put at the index it belongs when the 
+     * array is sorted. Everything less than the pivot is in unsorted order before the pivot
+     * in the array, and everything greater than the pivot is in unsorted order after the pivot
+     * in the array.
+     * These two remaining unsorted arrays (not including the pivot) are recursively sorted.
+     * 
+     * @param arr   Array to be sorted
+     * @param l     Left index of the array to be sorted
+     * @param r     Right index of the array to be sorted
+     * @return      Index of the pivot that is now in the correct place for a sorted array
+     */
     private static int partition(int[] arr, int l, int r) {
         // finds a pivot and swaps it with the first element in the array
         swap(arr, l, choosePivot(arr, l, r));
@@ -116,25 +137,25 @@ public class Quicksort {
         
         System.out.print("\nInitial array 1: ");
         printIntArray(test1);
-        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test1, 0, test1.length - 1));
+        System.out.println("\nNumber of comparisons: " + QuickSort.sort(test1, 0, test1.length - 1));
         System.out.print("Sorted array 1: ");
         printIntArray(test1);
         
         System.out.print("\n\nInitial array 2: ");
         printIntArray(test2);
-        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test2, 0, test2.length - 1));
+        System.out.println("\nNumber of comparisons: " + QuickSort.sort(test2, 0, test2.length - 1));
         System.out.print("Sorted array 2: ");
         printIntArray(test2);
         
         System.out.print("\n\nInitial array 3: ");
         printIntArray(test3);
-        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test3, 0, test3.length - 1));
+        System.out.println("\nNumber of comparisons: " + QuickSort.sort(test3, 0, test3.length - 1));
         System.out.print("Sorted array 3: ");
         printIntArray(test3);
         
         System.out.print("\n\nInitial array 4: ");
         printIntArray(test4);
-        System.out.println("\nNumber of comparisons: " + Quicksort.sort(test4, 0, test4.length - 1));
+        System.out.println("\nNumber of comparisons: " + QuickSort.sort(test4, 0, test4.length - 1));
         System.out.print("Sorted array 4: ");
         printIntArray(test4);
         
@@ -143,7 +164,7 @@ public class Quicksort {
         System.out.println("\n\nGetting 10,000 ints array from file: " + fileName);
         int[] hugeArray = getArrayFromFile(fileName);
         System.out.println("Sorting 10,000 ints.");
-        System.out.println("Number of comparisons: " + Quicksort.sort(hugeArray, 0, hugeArray.length - 1));
+        System.out.println("Number of comparisons: " + QuickSort.sort(hugeArray, 0, hugeArray.length - 1));
         System.out.println("Array has been sorted. \nHere are the first " + numberToPrint + " numbers in the sorted array:");
         for (int i = 0; i < numberToPrint; i++) {
             System.out.print(hugeArray[i] + " ");
