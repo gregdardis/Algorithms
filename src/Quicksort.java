@@ -3,14 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This program is an implementation of QuickSort, with the pivot chosen using the median-of-three pivot rule.
+ * This program is an implementation of Quick Sort, with the pivot chosen using the median-of-three pivot rule.
  * 
  * The median-of-three rule chooses the pivot by considering the first, middle and last element
  * of the given array, and taking the median of these three values. The median element is swapped with
  * the first element of the given array, and that median element at index 0 is now the pivot.
- * Note: In array [1, 2, 3, 4] the middle element is the 2.
+ * Note: In the array [1, 2, 3, 4] the middle element is the 2.
  * 
- * This implementation of QuickSort counts the number of comparisons made while sorting,
+ * This implementation of Quick Sort counts the number of comparisons made while sorting,
  * and returns that number as an int. 
  * Note: The comparisons made while choosing the pivot using the median-of-three rule are not counted.
  * 
@@ -19,7 +19,7 @@ import java.util.Scanner;
 public class QuickSort {
     
     /**
-     * Sorts an array of ints using the QuickSort algorithm, and counts
+     * Sorts an array of ints using the Quick Sort algorithm, and counts
      * the number of comparisons made while sorting.
      * 
      * @param arr   Array to be sorted
@@ -133,7 +133,7 @@ public class QuickSort {
         int[] test2 = {3, 2, 1, 6, 3};
         int[] test3 = {0};
         int[] test4 = {12, 11, 13, 5, 7, 6, 0, 5, 32, 7, 32, 21, 0, 8};
-        System.out.println("This is a quick sort demonstration, where the total number of comparisons is counted.");
+        System.out.println("This is a Quick Sort demonstration, where the number of comparisons made to sort the array is shown.");
         
         System.out.print("\nInitial array 1: ");
         printIntArray(test1);

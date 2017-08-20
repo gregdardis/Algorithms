@@ -15,14 +15,13 @@ Compile:
 `javac Karatsuba.java`
 
 Run:  
-`java Karatsuba`
-
-
-
-
+`java Karatsuba`  
+  
+  
+   
 # Merge Sort and Count
 ## Description
-This program uses the recursive merge sort algorithm to sort an array of ints, while also counting the number of inversions of the original array.  
+This program uses the recursive Merge Sort algorithm to sort an array of ints, while also counting the number of inversions of the original array.  
 
 An inversion in an array is defined as such: If A[i], A[j] are two entries in an array A,  i and j are inverted if j > i but A[j] < A[i].  
 Basically, if a larger number precedes a smaller number in the array, that is an inversion.
@@ -33,13 +32,39 @@ a short demonstration of sorting four different int arrays and prints how many i
 
 ## Command Line Instructions for Merge Sort and Count
 
-`cd src`
+`cd src/`
 
 Compile:  
 `javac MergesortAndCount.java`  
 
 Run:  
-`java MergesortAndCount`
+`java MergesortAndCount`  
+
+
+
+
+# Quick Sort
+## Description
+This program uses the recursive Quick Sort algorithm to sort an array of ints, while also counting the number of comparisons made while sorting. The pivot is chosen using the median-of-three pivot rule.  
+Note: The comparisons made while choosing the pivot using the median-of-three rule are not counted.  
+
+The median-of-three rule chooses the pivot by considering the first, middle and last element of the given array, and taking the median of these three values. The median element is swapped with the first element of the given array, and that median element at index 0 is now the pivot.  
+Note: In the array [1, 2, 3, 4] the middle element is the 2.  
+
+The program doesn't prompt the user to enter any values, it just shows
+a short demonstration of sorting four different int arrays and prints how many comparisons the algorithm had to make in order to sort the array.  
+
+## Command Line Instructions for Quick Sort
+
+`cd src/`
+
+Compile:  
+`javac QuickSort.java`  
+
+Run:  
+`java QuickSort` 
+
+
 
 
 

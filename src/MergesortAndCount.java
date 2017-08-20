@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * This program is an implementation of the recursive merge sort algorithm, with a counting feature
+ * This program is an implementation of the recursive Merge Sort algorithm, with a counting feature
  * to count the number of inversions in the original array.
  * An inversion in an array is defined as such: If A[i], A[j] are two entries in an array A, 
  * i and j are inverted if j > i but A[j] < A[i].
@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class MergesortAndCount {
 
     /**
-     * Sorts an array of ints using the merge sort algorithm, and counts
+     * Sorts an array of ints using the Merge Sort algorithm, and counts
      * the number of inversions in the array while sorting.
      * 
      * @param arr   Array to be sorted
