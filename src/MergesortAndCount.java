@@ -11,6 +11,8 @@ import java.util.Scanner;
  * The sortAndCount method sorts an array of ints (and returns the number of inversions).
  * There is a demonstration in the main method of arrays being sorted and their sorted form
  * as well as number of inversions in the original array are printed to the console.
+ * 
+ * The main() method contains a demonstration of the sorting algorithm.
  */
 public class MergesortAndCount {
 

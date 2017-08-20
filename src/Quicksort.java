@@ -1,8 +1,21 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * This program is an implementation of quicksort, with the pivot chosen using the median-of-three pivot rule.
+ * 
+ * The median-of-three rule chooses the pivot by considering the first, middle and last element
+ * of the given array, and taking the median of these three values. The median element is swapped with
+ * the first element of the given array, and that median element at index 0 is now the pivot.
+ * Note: In array [1, 2, 3, 4] the middle element is the 2.
+ * 
+ * This implementation of quicksort counts the number of comparisons made while sorting,
+ * and returns that number as an int. 
+ * Note: The comparisons made while choosing the pivot using the median-of-three rule are not counted.
+ * 
+ * The main() method contains a demonstration of the sorting algorithm.
+ */
 public class Quicksort {
 
     public static int sort(int[] arr, int l, int r) {
@@ -93,6 +106,7 @@ public class Quicksort {
         return arr;
     }
     
+    /** Quicksort demonstration. */
     public static void main(String[] args) {
         int[] test1 = {3, 2};
         int[] test2 = {3, 2, 1, 6, 3};
