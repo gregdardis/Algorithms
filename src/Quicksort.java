@@ -6,7 +6,7 @@ import java.util.Scanner;
  * This program is an implementation of Quick Sort, with the pivot chosen using the median-of-three pivot rule.
  * 
  * The median-of-three rule chooses the pivot by considering the first, middle and last element
- * of the given array, and taking the median of these three values. The median element is swapped with
+ * of the given array; the median of these three values is the pivot. The median element is swapped with
  * the first element of the given array, and that median element at index 0 is now the pivot.
  * Note: In the array [1, 2, 3, 4] the middle element is the 2.
  * 

@@ -48,11 +48,11 @@ Run:
 This program uses the recursive Quick Sort algorithm to sort an array of ints, while also counting the number of comparisons made while sorting. The pivot is chosen using the median-of-three pivot rule.  
 Note: The comparisons made while choosing the pivot using the median-of-three rule are not counted.  
 
-The median-of-three rule chooses the pivot by considering the first, middle and last element of the given array, and taking the median of these three values. The median element is swapped with the first element of the given array, and that median element at index 0 is now the pivot.  
+The median-of-three rule chooses the pivot by considering the first, middle and last element of the given array; the median of these three values is the pivot. The median element is swapped with the first element of the given array, and that median element at index 0 is now the pivot.  
 Note: In the array [1, 2, 3, 4] the middle element is the 2.  
 
 The program doesn't prompt the user to enter any values, it just shows
-a short demonstration of sorting four different int arrays and prints how many comparisons the algorithm had to make in order to sort the array.  
+a short demonstration of sorting four different int arrays and prints how many comparisons the algorithm had to make in order to sort each array.  
 
 ## Command Line Instructions for Quick Sort
 
