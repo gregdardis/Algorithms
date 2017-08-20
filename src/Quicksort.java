@@ -8,7 +8,6 @@ public class Quicksort {
     public static int sort(int[] arr, int l, int r) {
         int comparisons = 0;
         if (r - l < 1) return 0;
-        // swap pivot to first element if it's not already first element
         int pivotIndex = partition(arr, l, r);
         comparisons += sort(arr, l, pivotIndex - 1);
         comparisons += sort(arr, pivotIndex + 1, r);
@@ -16,8 +15,10 @@ public class Quicksort {
     }
     
     private static int partition(int[] arr, int l, int r) {
+        // finds a pivot and swaps it with the first element in the array
         swap(arr, l, choosePivot(arr, l, r));
         int pivotIndex = l;
+        
         // pointer to first element that is greater than the pivot
         int i = l + 1;
         
@@ -27,14 +28,16 @@ public class Quicksort {
                 i++;
             }
         }
+        
         swap(arr, pivotIndex, i - 1);
         return i - 1;
     }
     
     /**
-     * TODO: make this calculate the median-of-three pivot as per assignment specifications.
-     * Simply chooses the last element in the array for this implementation. 
-     * Going to be upgraded to the median-of-three pivot rule soon.
+     * Chooses the pivot for each new partition. 
+     * Utilizes the median-of-three pivot rule.
+     * Median is found by putting the three choices into an array and sorting it,
+     * then the index of the median of the first, middle, and last number in the array is returned.
      */
     private static int choosePivot(int[] arr, int l, int r) {
         int first = arr[l];
@@ -121,12 +124,16 @@ public class Quicksort {
         System.out.print("Sorted array 4: ");
         printIntArray(test4);
         
+        int numberToPrint = 100;
         String fileName = "QuickSort.txt";
         System.out.println("\n\nGetting 10,000 ints array from file: " + fileName);
         int[] hugeArray = getArrayFromFile(fileName);
         System.out.println("Sorting 10,000 ints.");
         System.out.println("Number of comparisons: " + Quicksort.sort(hugeArray, 0, hugeArray.length - 1));
-        System.out.println("Array has been sorted.");
+        System.out.println("Array has been sorted. \nHere are the first " + numberToPrint + " numbers in the sorted array:");
+        for (int i = 0; i < numberToPrint; i++) {
+            System.out.print(hugeArray[i] + " ");
+        }
         
     }
     

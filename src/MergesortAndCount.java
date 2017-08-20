@@ -150,10 +150,14 @@ public class MergesortAndCount {
         System.out.print("Sorted array 3: ");
         printIntArray(test3);
         
+        int numberToPrint = 100;
         String fileName = "IntegerArray.txt";
         System.out.println("\n\nGetting 100,000 ints array from file: " + fileName);
         int[] hugeArray = getArrayFromFile(fileName);
         System.out.println("Number of inversions: " + sortAndCount(hugeArray, 0, hugeArray.length - 1));
-        System.out.println("Array has been sorted.");
+        System.out.println("Array has been sorted. \nHere are the first " + numberToPrint + " numbers in the sorted array:");
+        for (int i = 0; i < numberToPrint; i++) {
+            System.out.print(hugeArray[i] + " ");
+        }
     }
 }
