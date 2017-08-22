@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,22 +16,39 @@ public class KargerMinCut {
     
     public static void findMinCut(HashMap<Integer, ArrayList<Integer>> graph) {
         while (graph.size() > 2) {
-            // get a vertex and another vertex that the first vertex shares an edge with
-            // here, vertex1 and vertex2 share an edge
+            // Get a vertex and another vertex that the first vertex shares an edge with.
+            // Here, vertex1 and vertex2 share an edge
             Integer vertex1 = getRandomNumberInRange(1, graph.size());
-            ArrayList<Integer> connectedVertices = graph.get(vertex1);
-            int randomIndex = getRandomNumberInRange(0, connectedVertices.size() - 1);
-            Integer vertex2 = connectedVertices.get(randomIndex);
+            ArrayList<Integer> vertex1List = graph.get(vertex1);
+            int randomIndex = getRandomNumberInRange(0, vertex1List.size() - 1);
+            Integer vertex2 = vertex1List.get(randomIndex);
             
             // contract those vertices into the first vertex
-//            contract(graph, vertex1, vertex2);
+            contract(graph, vertex1, vertex2);
             
             // remove self loops
-           
+            vertex1List.removeAll(Collections.singleton(vertex1));
         }
         
-        
         // after while loop, return cut represented by the remaining 2 vertices
+        
+    }
+    
+    /**
+     * Contracts an edge in a graph. If vertex1 and vertex2 form an edge, and this edge is contracted,
+     * all vertices connected to vertex2 are now connected to vertex1, and vertex2 is removed.
+     * 
+     * @param graph     Graph in which to contract an edge
+     * @param vertex1   Vertex at one end of the edge to be contracted
+     * @param vertex2   Vertex at the other end of the edge to be contracted
+     */
+    private static void contract(HashMap<Integer, ArrayList<Integer>> graph, Integer vertex1, Integer vertex2) {
+        ArrayList<Integer> vertex1List = graph.get(vertex1);
+        ArrayList<Integer> vertex2List = graph.get(vertex2);
+        for (int i = 0; i < vertex2List.size(); i++) {
+            vertex1List.add(vertex2List.get(i));
+        }
+        graph.remove(vertex2);
     }
     
     /**
