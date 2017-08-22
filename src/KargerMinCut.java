@@ -14,10 +14,9 @@ import java.util.StringTokenizer;
 
 public class KargerMinCut {
     
-    public static void findMinCut(HashMap<Integer, ArrayList<Integer>> graph) {
+    public static int findMinCut(HashMap<Integer, ArrayList<Integer>> graph) {
         int originalGraphSize = graph.size();
         while (graph.size() > 2) {
-            System.out.println("Graph size: " + graph.size());
             // Get a vertex and another vertex that the first vertex shares an edge with.
             // Here, vertex1 and vertex2 share an edge
             Integer vertex1 = getRandomNumberInRange(1, originalGraphSize);
@@ -29,8 +28,6 @@ public class KargerMinCut {
             int randomIndex = getRandomNumberInRange(0, vertex1List.size() - 1);
             Integer vertex2 = vertex1List.get(randomIndex);
             
-            // contract those vertices into the first vertex
-            System.out.println("Contracting " + vertex2 + " into " + vertex1);
             contract(graph, vertex1, vertex2);
             
             // remove self loops
@@ -38,13 +35,12 @@ public class KargerMinCut {
         }
         
         // after while loop, return cut represented by the remaining 2 vertices
+        int count = 0;
         for (Integer key : graph.keySet()) {
-            ArrayList<Integer> listToPrint = graph.get(key); 
-            System.out.print("\nRemaining vertices: ");
-            for (int i = 0; i < listToPrint.size(); i++) {
-                System.out.print(listToPrint.get(i) + " ");
-            }
+            ArrayList<Integer> listToPrint = graph.get(key);
+            count = listToPrint.size();
         }
+        return count;
     }
     
     /**
@@ -141,6 +137,20 @@ public class KargerMinCut {
         iterator.remove();
     }
     
+    private static HashMap<Integer, ArrayList<Integer>> copyGraph(HashMap<Integer, ArrayList<Integer>> graph) {
+        HashMap<Integer, ArrayList<Integer>> copiedGraph = new HashMap<>();
+        
+        Iterator iterator = graph.keySet().iterator();
+        
+        while (iterator.hasNext()) {
+            Integer currentKey = (Integer) iterator.next();
+            ArrayList<Integer> currentItemList = graph.get(currentKey);
+            
+            copiedGraph.put(currentKey, new ArrayList<Integer>(currentItemList));
+        }
+        return copiedGraph;
+    }
+    
     private static HashMap<Integer, ArrayList<Integer>> createSmallTestGraph() {
         HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
         
@@ -166,7 +176,16 @@ public class KargerMinCut {
         HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
         graph = readGraphFromFile("kargerMinCut.txt", graph);
 //        graph = createSmallTestGraph();
-        findMinCut(graph);
-//        printGraphContents(graph);
+        int numTrials = 25;
+        int count = 0;
+        int minCuts = 500;
+        for (int i = 0; i < numTrials; i++) {
+            HashMap<Integer, ArrayList<Integer>> graphCopy = copyGraph(graph);
+            count = findMinCut(graphCopy);
+            if (count < minCuts)  {
+                minCuts = count;
+            }
+        }
+        System.out.println("Min cuts found: " + minCuts);
     }
 }
