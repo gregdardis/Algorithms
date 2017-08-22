@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.DataInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +12,34 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 public class KargerMinCut {
+    
+    public static void findMinCut(HashMap<Integer, ArrayList<Integer>> graph) {
+        while (graph.size() > 2) {
+            // get a vertex and another vertex that the first vertex shares an edge with
+            // here, vertex1 and vertex2 share an edge
+            Integer vertex1 = getRandomNumberInRange(1, graph.size());
+            ArrayList<Integer> connectedVertices = graph.get(vertex1);
+            int randomIndex = getRandomNumberInRange(0, connectedVertices.size() - 1);
+            Integer vertex2 = connectedVertices.get(randomIndex);
+            
+            // contract those vertices into the first vertex
+//            contract(graph, vertex1, vertex2);
+            
+            // remove self loops
+           
+        }
+        
+        
+        // after while loop, return cut represented by the remaining 2 vertices
+    }
+    
+    /**
+     * Returns a random int between min and max, inclusive.
+     */
+    private static int getRandomNumberInRange(int min, int max) {
+        int range = (max - min) + 1;
+        return (int)(Math.random() * range) + min;
+    }
     
     private static HashMap<Integer, ArrayList<Integer>> readGraphFromFile(String fileName, HashMap<Integer, ArrayList<Integer>> graph) {
         
@@ -91,6 +118,6 @@ public class KargerMinCut {
         HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
         graph = readGraphFromFile("kargerMinCut.txt", graph);
 //        graph = createSmallTestGraph();
-        printGraphContents(graph);
+//        printGraphContents(graph);
     }
 }
