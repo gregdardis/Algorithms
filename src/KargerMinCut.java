@@ -15,15 +15,22 @@ import java.util.StringTokenizer;
 public class KargerMinCut {
     
     public static void findMinCut(HashMap<Integer, ArrayList<Integer>> graph) {
+        int originalGraphSize = graph.size();
         while (graph.size() > 2) {
+            System.out.println("Graph size: " + graph.size());
             // Get a vertex and another vertex that the first vertex shares an edge with.
             // Here, vertex1 and vertex2 share an edge
-            Integer vertex1 = getRandomNumberInRange(1, graph.size());
+            Integer vertex1 = getRandomNumberInRange(1, originalGraphSize);
             ArrayList<Integer> vertex1List = graph.get(vertex1);
+            while (vertex1List == null) {
+                vertex1 = getRandomNumberInRange(1, originalGraphSize);
+                vertex1List = graph.get(vertex1);
+            }
             int randomIndex = getRandomNumberInRange(0, vertex1List.size() - 1);
             Integer vertex2 = vertex1List.get(randomIndex);
             
             // contract those vertices into the first vertex
+            System.out.println("Contracting " + vertex2 + " into " + vertex1);
             contract(graph, vertex1, vertex2);
             
             // remove self loops
@@ -31,7 +38,13 @@ public class KargerMinCut {
         }
         
         // after while loop, return cut represented by the remaining 2 vertices
-        
+        for (Integer key : graph.keySet()) {
+            ArrayList<Integer> listToPrint = graph.get(key); 
+            System.out.print("\nRemaining vertices: ");
+            for (int i = 0; i < listToPrint.size(); i++) {
+                System.out.print(listToPrint.get(i) + " ");
+            }
+        }
     }
     
     /**
@@ -49,6 +62,22 @@ public class KargerMinCut {
             vertex1List.add(vertex2List.get(i));
         }
         graph.remove(vertex2);
+        replaceAllInstances(graph, vertex1, vertex2);
+    }
+    
+    /**
+     * Goes through a graph and replaces all instances of vertex2 with vertex1.
+     */
+    private static void replaceAllInstances(HashMap<Integer, ArrayList<Integer>> graph, Integer vertex1, Integer vertex2) {
+        for (Map.Entry<Integer, ArrayList<Integer>> entry: graph.entrySet()) {
+            ArrayList<Integer> list = entry.getValue();
+            for (int i = 0; i < list.size(); i++) {
+                while (list.contains(vertex2)) {
+                    list.remove(vertex2);
+                    list.add(vertex1);
+                }
+            }
+        }
     }
     
     /**
@@ -107,8 +136,9 @@ public class KargerMinCut {
                 System.out.print(((ArrayList<Integer>) pair.getValue()).get(i) + " ");
             }
             System.out.println("\n");
-            iterator.remove();
+            
         }
+        iterator.remove();
     }
     
     private static HashMap<Integer, ArrayList<Integer>> createSmallTestGraph() {
@@ -119,9 +149,9 @@ public class KargerMinCut {
         ArrayList<Integer> list3 = new ArrayList<Integer>();
         ArrayList<Integer> list4 = new ArrayList<Integer>();
         ArrayList<Integer> list5 = new ArrayList<Integer>();
-        list1.addAll(Arrays.asList(2, 3));
+        list1.addAll(Arrays.asList(2, 3, 3));
         list2.addAll(Arrays.asList(1, 5, 4));
-        list3.addAll(Arrays.asList(1, 4));
+        list3.addAll(Arrays.asList(1, 1, 4));
         list4.addAll(Arrays.asList(5, 2, 3));
         list5.addAll(Arrays.asList(2, 4));
         graph.put(1, list1);
@@ -136,6 +166,7 @@ public class KargerMinCut {
         HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
         graph = readGraphFromFile("kargerMinCut.txt", graph);
 //        graph = createSmallTestGraph();
+        findMinCut(graph);
 //        printGraphContents(graph);
     }
 }
