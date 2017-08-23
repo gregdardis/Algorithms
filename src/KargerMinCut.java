@@ -10,8 +10,25 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
+/**
+ * This program is an implementation of Karger's algorithm, which is used to compute a 
+ * minimum cut of a connected graph.
+ * 
+ * The algorithm is based being able to "contract" an edge, which merges the two endpoint 
+ * nodes of that edge into one node. For example, contracting node B into node A connects
+ * all nodes that were connected to node B to node A, and removes node A. After each contraction,
+ * all self loops (a node connected by an edge to itself) are removed.
+ * 
+ * Let n be the number of nodes in the graph.
+ * Running this algorithm (n^2)ln(n) times and recording the remaining cuts when there are only
+ * two nodes remaining gives only a 1/n chance that the minimum cut is not computed on one of these trials.
+ * 
+ * If a graph is going to be used more than once (printing it and findMinCut(), or findMinCut() more than once)
+ * a copy should be made using copyGraph().
+ */
 public class KargerMinCut {
     
     public static int findMinCut(HashMap<Integer, ArrayList<Integer>> graph) {
@@ -127,7 +144,7 @@ public class KargerMinCut {
         Iterator iterator = graph.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry) iterator.next();
-            System.out.print(pair.getKey() + " node is connected to the following edges: ");
+            System.out.print("Node " + pair.getKey() + " is connected to the following edges: ");
             for (int i = 0; i < ((ArrayList<Integer>) pair.getValue()).size(); i++) {
                 System.out.print(((ArrayList<Integer>) pair.getValue()).get(i) + " ");
             }
@@ -175,17 +192,31 @@ public class KargerMinCut {
     public static void main(String[] args) {
         HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
         graph = readGraphFromFile("kargerMinCut.txt", graph);
-//        graph = createSmallTestGraph();
-        int numTrials = 25;
+        int numTrials = 50;
         int count = 0;
-        int minCuts = 500;
-        for (int i = 0; i < numTrials; i++) {
+        int minCut = 500;
+        System.out.println("Number of trials to be completed: " + numTrials);
+        for (int i = 1; i <= numTrials; i++) {
             HashMap<Integer, ArrayList<Integer>> graphCopy = copyGraph(graph);
             count = findMinCut(graphCopy);
-            if (count < minCuts)  {
-                minCuts = count;
+            System.out.println("Trial: " + i + " - Cuts found: " + count);
+            if (count < minCut)  {
+                minCut = count;
             }
         }
-        System.out.println("Min cuts found: " + minCuts);
+        System.out.println("Min cut found: " + minCut);
+        System.out.println("Number of trials completed: " + numTrials);
+        System.out.println("Number of nodes in the graph: 200");
+        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Would you like to see the graph the algorithm was run on? (y/n) ");
+        String userAnswer = scanner.nextLine();
+        if (userAnswer.equals("y")) {
+            HashMap<Integer, ArrayList<Integer>> graphPrintCopy = copyGraph(graph);
+            printGraphContents(graphPrintCopy);
+        }
+        System.out.println("Goodbye.");
+        scanner.close();
     }
+        
 }
