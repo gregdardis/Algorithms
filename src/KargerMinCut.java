@@ -39,7 +39,8 @@ import java.util.StringTokenizer;
  */
 public class KargerMinCut {
     
-    public static int findMinCut(HashMap<Integer, ArrayList<Integer>> graph) {
+    public static int findMinCut(HashMap<Integer, ArrayList<Integer>> originalGraph) {
+        HashMap<Integer, ArrayList<Integer>> graph = copyGraph(originalGraph);
         int originalGraphSize = graph.size();
         while (graph.size() > 2) {
             // Get a vertex and another vertex that the first vertex shares an edge with.
@@ -161,7 +162,8 @@ public class KargerMinCut {
      * Note: copy the graph you want to print and pass it to this method.
      */
     private static void printGraphContents(HashMap<Integer, ArrayList<Integer>> graph) {
-        Iterator iterator = graph.entrySet().iterator();
+        HashMap<Integer, ArrayList<Integer>> graphPrintCopy = copyGraph(graph);
+        Iterator iterator = graphPrintCopy.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry pair = (Map.Entry) iterator.next();
             System.out.print("Node " + pair.getKey() + " is connected to the following edges: ");
@@ -174,6 +176,10 @@ public class KargerMinCut {
         iterator.remove();
     }
     
+    /**
+     * Makes a duplicate of the given graph. 
+     * To be used before finding the minimum cut which will involve changing the original graph.
+     */
     private static HashMap<Integer, ArrayList<Integer>> copyGraph(HashMap<Integer, ArrayList<Integer>> graph) {
         HashMap<Integer, ArrayList<Integer>> copiedGraph = new HashMap<>();
         
@@ -188,6 +194,10 @@ public class KargerMinCut {
         return copiedGraph;
     }
     
+    /**
+     * A small test graph that is easy to follow along with while the algorithm 
+     * finds it's min cut.
+     */
     private static HashMap<Integer, ArrayList<Integer>> createSmallTestGraph() {
         HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
         
@@ -209,6 +219,9 @@ public class KargerMinCut {
         return graph;
     }
     
+    /**
+     * Demonstration on a 200 node graph.
+     */
     public static void main(String[] args) {
         HashMap<Integer, ArrayList<Integer>> graph = new HashMap<>();
         graph = readGraphFromFile("kargerMinCut.txt", graph);
@@ -217,8 +230,7 @@ public class KargerMinCut {
         int minCut = 500;
         System.out.println("Number of trials to be completed: " + numTrials);
         for (int i = 1; i <= numTrials; i++) {
-            HashMap<Integer, ArrayList<Integer>> graphCopy = copyGraph(graph);
-            count = findMinCut(graphCopy);
+            count = findMinCut(graph);
             System.out.println("Trial: " + i + " - Cuts found: " + count);
             if (count < minCut)  {
                 minCut = count;
@@ -232,8 +244,7 @@ public class KargerMinCut {
         System.out.print("Would you like to see the graph the algorithm was run on? (y/n) ");
         String userAnswer = scanner.nextLine();
         if (userAnswer.equals("y")) {
-            HashMap<Integer, ArrayList<Integer>> graphPrintCopy = copyGraph(graph);
-            printGraphContents(graphPrintCopy);
+            printGraphContents(graph);
         }
         System.out.println("Goodbye.");
         scanner.close();
