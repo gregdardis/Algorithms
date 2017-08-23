@@ -28,6 +28,14 @@ import java.util.StringTokenizer;
  * 
  * If a graph is going to be used more than once (printing it and findMinCut(), or findMinCut() more than once)
  * a copy should be made using copyGraph().
+ * 
+ * There is a demonstration of the algorithm running on a 200 node graph from file kargerMinCut.txt in the main method, 
+ * only completing 50 trials and still somewhat reliably coming up with the right answer (minimum cut == 17).
+ * The reason only 50 trials are performed is because (n^2)ln(n) with n = 200 is a large number and would take
+ * awhile with this slow algorithm.
+ * 
+ * Graphs are stored in a HashMap<Integer, ArrayList<Integer>>, where each vertex is numbered and mapped to an ArrayList of all
+ * vertices it shares an edge with.
  */
 public class KargerMinCut {
     
@@ -101,6 +109,14 @@ public class KargerMinCut {
         return (int)(Math.random() * range) + min;
     }
     
+    /**
+     * Reads a graph from a file into a HashMap. Graph must be in a specific form.
+     * The first column in the file represents the vertex label, and all entries in that
+     * vertexes row (aside from the first column) tells all vertices that the vertex
+     * shares an edge with.
+     * 
+     * @param fileName  File to read the graph from
+     */
     private static HashMap<Integer, ArrayList<Integer>> readGraphFromFile(String fileName, HashMap<Integer, ArrayList<Integer>> graph) {
         
         BufferedReader bufferedReader = null;
@@ -140,6 +156,10 @@ public class KargerMinCut {
         return graph;
     }
     
+    /**
+     * Prints the graph to the console. 
+     * Note: copy the graph you want to print and pass it to this method.
+     */
     private static void printGraphContents(HashMap<Integer, ArrayList<Integer>> graph) {
         Iterator iterator = graph.entrySet().iterator();
         while (iterator.hasNext()) {
