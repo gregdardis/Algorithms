@@ -15,7 +15,8 @@ import java.util.StringTokenizer;
 
 /**
  * This program is an implementation of Karger's algorithm, which is used to compute a 
- * minimum cut of a connected graph.
+ * minimum cut of a connected graph. This algorithm is randomized, so the edges
+ * which are chosen to be "contracted" (next paragraph) are chosen randomly on every run of the algorithm.
  * 
  * The algorithm is based being able to "contract" an edge, which merges the two endpoint 
  * nodes of that edge into one node. For example, contracting node B into node A connects
@@ -25,9 +26,6 @@ import java.util.StringTokenizer;
  * Let n be the number of nodes in the graph.
  * Running this algorithm (n^2)ln(n) times and recording the remaining cuts when there are only
  * two nodes remaining gives only a 1/n chance that the minimum cut is not computed on one of these trials.
- * 
- * If a graph is going to be used more than once (printing it and findMinCut(), or findMinCut() more than once)
- * a copy should be made using copyGraph().
  * 
  * There is a demonstration of the algorithm running on a 200 node graph from file kargerMinCut.txt in the main method, 
  * only completing 50 trials and still somewhat reliably coming up with the right answer (minimum cut == 17).
@@ -60,7 +58,7 @@ public class KargerMinCut {
             vertex1List.removeAll(Collections.singleton(vertex1));
         }
         
-        // after while loop, return cut represented by the remaining 2 vertices
+        // return cut represented by the remaining 2 vertices
         int count = 0;
         for (Integer key : graph.keySet()) {
             ArrayList<Integer> listToPrint = graph.get(key);

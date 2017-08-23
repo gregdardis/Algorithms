@@ -1,6 +1,6 @@
 ***All programs made using Eclipse, version: Neon.2 Release (4.6.2)*.**
 
-# Karatsuba Multiplication
+# __***Karatsuba Multiplication***__ 
 ## Description
 This program uses the recursive Karatsuba multiplication algorithm to compute the product of two numbers. These numbers can be huge due to the use of the BigInteger class. 
 
@@ -19,7 +19,7 @@ Run:
   
   
    
-# Merge Sort and Count
+# __***Merge Sort and Count***__
 ## Description
 This program uses the recursive Merge Sort algorithm to sort an array of ints, while also counting the number of inversions of the original array.  
 
@@ -43,7 +43,7 @@ Run:
 
 
 
-# Quick Sort
+# __***Quick Sort***__
 ## Description
 This program uses the recursive Quick Sort algorithm to sort an array of ints, while also counting the number of comparisons made while sorting. The pivot is chosen using the median-of-three pivot rule.  
 Note: The comparisons made while choosing the pivot using the median-of-three rule are not counted.  
@@ -62,7 +62,38 @@ Compile:
 `javac QuickSort.java`  
 
 Run:  
-`java QuickSort` 
+`java QuickSort`  
+
+
+
+# __***Karger's Minimum Cut Algorithm***__
+
+## Description
+
+  This program is an implementation of Karger's algorithm, which is used to compute a 
+  minimum cut of a connected graph. This algorithm is randomized, so the edges
+  which are chosen to be "contracted" (next paragraph) are chosen randomly on every run of the algorithm.
+ 
+ The algorithm is based being able to "contract" an edge, which merges the two endpoint 
+  nodes of that edge into one node. For example, contracting node B into node A connects
+ all nodes that were connected to node B to node A, and removes node A. After each contraction, all self loops (a node connected by an edge to itself) are removed.
+ 
+Let n be the number of nodes in the graph.
+Running this algorithm (n^2)ln(n) times and recording the remaining cuts when there are only two nodes remaining gives only a 1/n chance that the minimum cut is not computed on one of these trials.
+
+There is a demonstration of the algorithm running on a 200 node graph from file kargerMinCut.txt in the main method, only completing 50 trials and still somewhat reliably coming up with the right answer (minimum cut == 17). The reason only 50 trials are performed is because (n^2)ln(n) with n = 200 is a large number and would take awhile with this slow algorithm.
+
+Graphs are stored in a HashMap\<Integer, ArrayList\<Integer\>\>, where each vertex is numbered and mapped to an ArrayList of all vertices it shares an edge with.  
+
+## Command Line Instructions for Karger's Min Cut Algorithm
+
+`cd src/`
+
+Compile:  
+`javac KargerMinCut.java`  
+
+Run:  
+`java KargerMinCut`
 
 
 
